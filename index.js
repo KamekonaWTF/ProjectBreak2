@@ -3,8 +3,9 @@ const dbConnection = require('./config/config')
 const app = express()
 require('dotenv').config()
 PORT = process.env.PORT || 3000
+const routes = require('./routes/productRoutes')
 
-app.get('/',(req, res) => (res.send('Proyecto back')))
+app.use('/', routes)
 
 dbConnection()
 
