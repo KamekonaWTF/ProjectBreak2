@@ -1,6 +1,7 @@
 const Product = require('../models/Product')
 
 const ProductController = {
+    
     async create (req, res) {
         try {
             const product = await Product.create({...req.body})
@@ -25,18 +26,18 @@ const ProductController = {
                 ${product.map(product => {
                     return (
                         `<div>
-                            <h2>${product.name}</h2>
+                        <a href="/id/${product._id}"><h2>${product.name}</h2></a>
                             <h3>${product.size}</h3>
                             <p>${product.description}</p>
-                            <h3>${product.price}</h3>
+                            <h3>${product.price} €</h3>
                         </div>`
                     )
                 }).join('')}
             `)
         } catch (error) {
             console.log(error)
-        }
-    },
+            }
+        },
     async getById(req, res) {
         try {
             const id = req.params._id
@@ -47,6 +48,9 @@ const ProductController = {
                     <h3>${product.size}</h3>
                     <p>${product.description}</p>
                     <h3>${product.price}</h3>
+                    <form action="${id}" method="POST">
+                        <button type="submit">Borrar</button>
+                    </form>
                 </div> 
             `)
         } catch(error) {
@@ -83,10 +87,10 @@ const ProductController = {
             res.send(`
                 <h1>Actualizar artículo</h1>
                 <form id="upform" action="/update/${id}" method="POST">
-                    <input id="" placeholder=${product.name} />
-                    <input id="" placeholder=${product.size} />
-                    <input id="" placeholder=${product.description} />
-                    <input id="" placeholder=${product.price} />
+                    <input placeholder=${product.name} />
+                    <input placeholder=${product.size} />
+                    <input placeholder=${product.description} />
+                    <input placeholder=${product.price} />
                     <button id="" type="submit">Actualizar</button>
                 </form>
             `)
