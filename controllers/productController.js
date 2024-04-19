@@ -1,7 +1,22 @@
 const Product = require('../models/Product')
 
 const ProductController = {
-    
+    async createForm (req, res) {
+        try {
+            res.send(`
+            <h1>Create item</h1>
+                <form id="createForm" action="/create" "method="POST">
+                    <input placeholder = "name" />
+                    <input placeholder = "size" />
+                    <input placeholder = "description" />
+                    <input placeholder = "price" />
+                    <button id="" type="submit">Create</button>
+                </form>
+            `)
+        } catch (error) {
+            console.log(error)
+        }
+    },
     async create (req, res) {
         try {
             const product = await Product.create({...req.body})
