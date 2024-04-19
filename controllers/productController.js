@@ -1,15 +1,15 @@
 const Product = require('../models/Product')
 
 const ProductController = {
-    async createForm (req, res) {
+    createForm (req, res) {
         try {
             res.send(`
             <h1>Create item</h1>
-                <form id="createForm" action="/create" "method="POST">
-                    <input placeholder = "name" />
-                    <input placeholder = "size" />
-                    <input placeholder = "description" />
-                    <input placeholder = "price" />
+                <form id="createForm" action="/create" method="POST" >
+                    <input name ="name" placeholder = "name" />
+                    <input name ="size" placeholder = "size" />
+                    <input name ="description" placeholder = "description" />
+                    <input name ="price" placeholder = "price" />
                     <button id="" type="submit">Create</button>
                 </form>
             `)
@@ -20,7 +20,7 @@ const ProductController = {
     async create (req, res) {
         try {
             const product = await Product.create({...req.body})
-            res.status(201).send(product)
+            res.status(201).send(`<p>Item saved in storage</p>`)
         } catch (error) {
             console.log(error)
         }
